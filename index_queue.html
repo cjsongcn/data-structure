@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列</title>
+</head>
+
+<body>
+    <script>
+        function Queue(items) {
+            this.items = items || [];
+
+            // 入队
+            Queue.prototype.enQueue = function (element) {
+                this.items.push(element);
+                return true;
+            }
+
+            // 出队
+            Queue.prototype.deQueue = function () {
+                return this.items.shift();
+            }
+
+            // 获取队首
+            Queue.prototype.getFront = function () {
+                return this.items[0];
+            }
+
+            // 获取队尾
+            Queue.prototype.getBackend = function () {
+                return this.items[this.items.length - 1];
+            }
+
+            // 清空队列
+            Queue.prototype.clear = function () {
+                this.items = []
+            }
+
+            // 队列数
+            Queue.prototype.size = function () {
+                return this.items.length;
+            }
+
+            // 是否为空队列
+            Queue.prototype.isEmpty = function () {
+                return this.items.length === 0;
+            }
+
+            // 打印队列
+            Queue.prototype.print = function () {
+                return this.items.toString();
+            }
+        }
+    </script>
+</body>
+
+</html>

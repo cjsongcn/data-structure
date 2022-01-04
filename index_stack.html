@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈</title>
+</head>
+
+<body>
+    <script>
+        function Stack() {
+            // 数据存储变量
+            this.items = [];
+
+            // 入栈
+            Stack.prototype.push = function (value) {
+                this.items.push(value)
+            }
+
+            // 出栈
+            Stack.prototype.pop = function () {
+                return this.items.pop();
+            }
+
+            // 栈顶
+            Stack.prototype.top = function () {
+                return this.items[this.items.length - 1];
+            }
+
+            // 长度
+            Stack.prototype.size = function () {
+                return this.items.length
+            }
+
+            // 是否为空
+            Stack.prototype.isEmpty = function () {
+                return this.items.length === 0
+            }
+        }
+        const stack = new Stack();
+
+        stack.push('a')
+
+        stack.push('b')
+
+        stack.push('c')
+
+        stack.push('d')
+    </script>
+</body>
+
+</html>

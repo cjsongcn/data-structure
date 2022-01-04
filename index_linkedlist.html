@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单向链表</title>
+</head>
+
+<body>
+    <script>
+        function LinkedList() {
+            this.head = null;
+            this.length = 0;
+
+            // 节点构建函数
+            function Node(value) {
+                this.value = value;
+                this.next = null;
+            }
+
+            // 链表追加
+            LinkedList.prototype.append = function (value) {
+                const node = new Node(value);
+                let current = null;
+
+                if (this.head) {
+                    current = this.head;
+                    while (current.next) {
+                        current = current.next;
+                    }
+                    current.next = node;
+                } else {
+                    this.head = node;
+                }
+                this.length++
+            }
+
+            // 任意位置插入
+            LinkedList.prototype.insert = function (position, value) {
+                if (position >= 0 && position <= this.length) {
+                    let node = new Node(value);
+                    let current = this.head;
+                    let previous = null;
+                    let index = 0;
+                    if (position === 0) {
+                        node.next = current;
+                        this.head = node;
+                    } else {
+                        while (index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        node.next = current;
+                        previous.next = node;
+                    }
+                    this.length++;
+                    return true
+                }
+                return false
+            }
+
+            // 删除指定位置
+            LinkedList.prototype.removeAt = function (position) {
+                if (position >= 0 && position < this.length) {
+                    let current = this.head;
+                    let index = 0;
+                    let previous = null;
+                    if (position === 0) {
+                        this.head = current.next
+                    } else {
+                        while (index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        }
+                        previous.next = current.next
+                    }
+                    this.length--;
+                    return current.value
+
+                }
+                return null
+
+            }
+
+            // 按值删除
+            LinkedList.prototype.remove = function (value) {
+                const position = this.findIndex(value);
+                this.removeAt(position);
+
+            }
+
+            // 查找元素下标
+            LinkedList.prototype.findIndex = function (value) {
+                let current = this.head;
+                let index = -1;
+
+                while (current) {
+                    if (value === current.value) {
+                        return index + 1
+                    }
+                    index++
+                    current = current.next;
+                }
+                return -1;
+
+
+            }
+
+            // 链表长度     
+            LinkedList.prototype.size = function () {
+                return this.length;
+
+            }
+
+            LinkedList.prototype.toString = function (cb) {
+                let linkedListValue = [];
+                let current = this.head;
+
+                while (current) {
+                    linkedListValue.push(current.value)
+                    current = current.next;
+                }
+
+                if (cb) {
+                    return cb(linkedListValue)
+                }
+
+                return linkedListValue.join('=>');
+            }
+        }
+
+        /*   const linkedList = new LinkedList();
+  
+          const random = () => Math.ceil(Math.random() * 10000);
+  
+          let i = 0;
+  
+          const arr = [];
+  
+          while (i < 10000) {
+              linkedList.append(random());
+              arr.push(random())
+              i++
+          }
+  
+          console.time();
+          linkedList.removeAt(0);
+          console.timeEnd();
+  
+          console.time();
+          arr.shift();
+          console.timeEnd(); */
+
+
+        // linkedList.append('a');
+        // linkedList.append('b');
+        // linkedList.append('c');
+    </script>
+</body>
+
+</html>
